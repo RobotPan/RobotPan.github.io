@@ -1,0 +1,7 @@
+# Template reference (not needed for deployment)
+meshmimic/
+
+# Intermediate processed images
+source/figure/bilibili1.png
+source/figure/bilibili2.jpg
+source/figure/bilibili1.jpg

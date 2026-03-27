@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="RobotPan: A 360° Surround-View Robotic Vision System for Embodied Perception">
+  <meta name="keywords" content="Surround-View; 3D Gaussian Splatting; Robotic Vision; Embodied Perception; Novel View Synthesis">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RobotPan</title>
+  <link rel="icon" href="source/figure/dexhead_icon.png" type="image/png">
+
+  <style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.3333333333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-both,:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:1;opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:.4;opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:.4;opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:1;opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fad.fa-inverse{color:#fff}</style>
+  <link rel="stylesheet" href="./template/bulma.min.css">
+  <link rel="stylesheet" href="./template/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./template/bulma-slider.min.css">
+  <link rel="stylesheet" href="./template/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./template/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="./template/index.css">
+
+  <script src="./template/jquery.min.js.下载"></script>
+  <script defer src="./template/fontawesome.all.min.js.下载"></script>
+
+  <style>
+    .video-frame,
+    .video-container {
+      border: 0 !important;
+      border-radius: 12px !important;
+      background: transparent !important;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18) !important;
+      overflow: hidden;
+      padding: 0 !important;
+      height: auto !important;
+      aspect-ratio: 16 / 9;
+    }
+
+    video {
+      border: 0 !important;
+      border-radius: 12px !important;
+      box-shadow: none !important;
+      display: block;
+      width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+
+    #hero-video {
+      object-fit: cover !important;
+      height: 100% !important;
+    }
+
+    .publication-authors {
+      font-size: 1.05rem;
+    }
+
+    .publication-authors .author-block a {
+      font-size: 1.05rem;
+    }
+
+    .publication-links .button {
+      font-size: 1rem;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+
+    .publication-links .button .icon {
+      font-size: 1.1rem;
+    }
+
+    .brand-accent {
+      color: #3b82f6;
+    }
+
+    .project-title-inline {
+      font-size: 3.6rem;
+      font-weight: 700;
+      color: #2f2f2f;
+      line-height: 1.35;
+    }
+
+    body {
+      background: #f2f2f2;
+      color: #1f2937;
+      font-family: "Source Sans 3", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .band {
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .band-a {
+      background: #f6f6f3;
+    }
+
+    .band-b {
+      background: #efefea;
+    }
+
+    .band-c {
+      background: #f7f7f2;
+    }
+
+    .band-d {
+      background: #ecece6;
+    }
+
+    .band-white {
+      background: #ffffff;
+    }
+
+    .container {
+      max-width: 1100px;
+    }
+
+    .title {
+      color: #1f2937;
+    }
+
+    .content,
+    .publication-authors,
+    .publication-links {
+      color: #4b5563;
+    }
+
+    .author-abstract {
+      margin-top: 1.25rem;
+    }
+
+    /* ── Carousel: 2×2 grid per page ── */
+    .carousel-wrapper {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-page {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 1.25rem;
+    }
+
+    .carousel-item {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.10);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .carousel-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.18);
+    }
+
+    .carousel-item video {
+      width: 100%;
+      height: auto;
+      border-radius: 12px 12px 0 0 !important;
+      object-fit: contain !important;
+      cursor: pointer;
+    }
+
+    .carousel-item .video-label {
+      font-size: 0.85rem;
+      color: #4b5563;
+      padding: 0.5rem 0.75rem;
+      text-align: center;
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    .carousel-nav {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      color: #111827;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+      transition: background 0.2s;
+    }
+
+    .carousel-nav:hover {
+      background: #f3f4f6;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d1d5db;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .carousel-dot.active {
+      background: #3b82f6;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .carousel-page {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .carousel-nav { justify-self: center; }
+    }
+
+
+    /* ── Main video section ── */
+    .main-video-wrapper {
+      max-width: 900px;
+      margin: 2rem auto 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+    }
+
+    .main-video-wrapper video {
+      border-radius: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ══════════════ HERO: Cover Video ══════════════ -->
+  <section class="hero is-link is-fullheight video" style="overflow: hidden; position:relative;">
+    <div class="hero-video" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 101%; height: 101%;">
+      <video id="hero-video" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+        <source src="source/video/demo_scene_overview.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); z-index: 1;"></div>
+
+    <div class="hero-body" style="position: relative; z-index: 2;">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 6.6rem; text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4);">
+          <span class="brand-accent">RobotPan</span>
+        </h1>
+        <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 3.6rem; text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4);">
+          A 360&#176; Surround-View Robotic Vision System for Embodied Perception
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ INFO: Authors / Links / Abstract ══════════════ -->
+  <section class="hero band band-white">
+    <div class="hero-body">
+      <div class="container is-fullhd">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <div class="project-title-inline" style="margin-bottom: 1.2rem;">
+              <span class="brand-accent">RobotPan</span>: A 360&#176; Surround-View Robotic Vision System for Embodied Perception
+            </div>
+            <div class="is-size-5 publication-authors" style="font-weight: 600;">
+              X-Humanoid Team
+            </div>
+
+            <div style="margin-top: 0.75rem;">
+              <img src="source/figure/x_humanoid_logo.png" alt="X-Humanoid"
+                   style="height: 1.4rem; width: auto; vertical-align: middle;">
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span>Data and Model (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <!-- ── Main Video ── -->
+            <div class="main-video-wrapper">
+              <video controls autoplay muted loop playsinline>
+                <source src="source/video/demo_scene_overview_with_title.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="content" style="font-size: 1rem; color: #4b5563; max-width: 860px; margin: 0.9rem auto 0; line-height: 1.7; text-align: center;">
+              <b><i>RobotPan</i></b>. A 360&deg; surround-view robotic vision system for real-time rendering, reconstruction, and streaming.
+            </p>
+
+            <div class="columns is-centered has-text-centered author-abstract">
+              <div class="column is-two-thirds">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                  <p>
+                    Surround-view perception is increasingly important for navigation and loco-manipulation, especially in human-in-the-loop settings such as teleoperation, data collection, and emergency takeover.
+                    However, current robot visual interfaces often rely on narrow forward-facing views, suffer from motion-induced jitter that causes simulator sickness in head-mounted displays, and require cumbersome manual switching among multiple on-board cameras.
+                    We introduce a surround-view robotic vision system that combines six cameras with LiDAR to provide full 360&deg; visual coverage, while meeting the geometric and real-time constraints of embodied deployment.
+                    We further present <b><i>RobotPan</i></b>, a feed-forward framework that predicts <em>metric-scaled</em> and <em>compact</em> 3D Gaussians from calibrated sparse-view inputs for real-time rendering, reconstruction, and streaming.
+                    <b><i>RobotPan</i></b> lifts multi-view features into a unified spherical coordinate representation and decodes Gaussians using hierarchical spherical voxel priors, allocating fine resolution near the robot and coarser resolution at larger radii to reduce redundancy without sacrificing fidelity.
+                    To support long sequences, our online fusion updates dynamic content while preventing unbounded growth in static regions by selectively updating appearance.
+                    Finally, we release a multi-sensor dataset tailored to 360&deg; novel view synthesis and metric 3D reconstruction for robotics, covering navigation, manipulation, and locomotion on real platforms.
+                    Experiments show that <b><i>RobotPan</i></b> achieves competitive quality against prior feed-forward reconstruction and view-synthesis methods while producing substantially fewer Gaussians, enabling practical real-time embodied deployment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ System Overview ══════════════ -->
+  <section class="section band band-a">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3" style="text-align: center;">System Overview</h2>
+          <div class="has-text-centered" style="margin-top: 1.5rem;">
+            <img src="source/figure/cover.jpg" alt="RobotPan system overview"
+                 style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);">
+          </div>
+          <div class="content has-text-justified" style="margin-top: 1rem;">
+            <p>
+              <strong>RobotPan</strong> is a surround-view robotic vision system engineered for <strong>real-time embodied perception</strong>. Integrating <strong>six RGB cameras and a central LiDAR</strong>, the system achieves full <strong>360&deg; visual coverage</strong> during complex robot operations. From calibrated sparse multi-view observations, RobotPan predicts <em>metric-scaled and compact 3D Gaussians</em>. This advanced representation directly enables <strong>real-time surround-view rendering</strong>, <strong>novel view synthesis</strong>, <strong>metric depth estimation</strong>, and <strong>sparse-view dense reconstruction</strong>. By jointly ensuring strict geometric consistency and real-time rendering performance, the system serves as a highly practical visual interface for humanoid robots across <strong>teleoperation</strong>, <strong>navigation</strong>, and <strong>loco-manipulation</strong> tasks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ Hardware Layout ══════════════ -->
+  <section class="section band band-white">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-3" style="text-align: center;">Tiangong2 Dex Robot</h2>
+          <div class="main-video-wrapper" style="max-width: 100%; margin-top: 1.5rem;">
+            <video controls autoplay loop muted playsinline>
+              <source src="source/video/Tiangong2Dex.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="content has-text-justified" style="margin-top: 0.75rem;">
+            <p style="font-size: 0.95rem; font-style: italic; color: #4b5563;">
+              Tiangong2 Dex demonstrates advanced whole-body motion control, showcasing agile locomotion, dynamic balance, and coordinated limb movements across diverse terrains and tasks.
+            </p>
+          </div>
+          <div class="has-text-centered" style="margin-top: 1.5rem;">
+            <img src="source/figure/layout.jpg" alt="Tiangong2 Dex sensor layout"
+                 style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);">
+          </div>
+          <div class="content has-text-justified" style="margin-top: 1rem;">
+            <p>
+              <strong>Tiangong2 Dex Robot and its RobotPan Vision System sensor layout.</strong> 
+              <strong>Left:</strong> Full-body view of the robot highlighting the head region. 
+              <strong>Middle:</strong> Close-up front and side views of the robot head. 
+              <strong>Right:</strong> Orthographic projections of the head-mounted sensing system. 
+              The diagrams illustrate a <em>compact sensor arrangement</em> featuring a <strong>central LiDAR</strong> and a ring of <strong>six RGB cameras</strong> distributed at <em>60-degree intervals</em>. This layout is designed to provide comprehensive <strong>360-degree panoramic coverage</strong> for robot visual perception.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SCENE VIDEOS: 2×2 Carousel ══════════════ -->
+  <section class="section band band-a">
+    <div class="container">
+      <h2 class="title is-2" style="text-align: center;">Scene Results</h2>
+      <p style="font-size: 1rem; color: #5b6472; max-width: 860px; margin: 0.75rem auto 0; line-height: 1.7; text-align: justify;">
+        We evaluate <b>RobotPan</b> across diverse real-world scenarios covering navigation, manipulation, and locomotion. From calibrated sparse-view inputs captured by the surround-view system, RobotPan produces compact 3D Gaussians for real-time 360&deg; rendering, novel view synthesis, and metric-scale depth estimation. The following results demonstrate the system's performance in representative scenes.
+      </p>
+
+      <div class="carousel-wrapper" id="scene-carousel">
+        <button class="carousel-nav" type="button" aria-label="Previous" id="scene-prev">
+          <svg viewBox="0 0 50 80" width="18" height="18"><polyline fill="currentColor" stroke-width=".5em" stroke-linecap="round" stroke-linejoin="round" points="45.63,75.8 0.375,38.087 45.63,0.375"></polyline></svg>
+        </button>
+        <div>
+          <div class="carousel-page" id="scene-page">
+            <div class="carousel-item" data-slot="0">
+              <video controls autoplay loop muted playsinline preload="metadata"></video>
+              <div class="video-label"></div>
+            </div>
+            <div class="carousel-item" data-slot="1">
+              <video controls autoplay loop muted playsinline preload="metadata"></video>
+              <div class="video-label"></div>
+            </div>
+            <div class="carousel-item" data-slot="2">
+              <video controls autoplay loop muted playsinline preload="metadata"></video>
+              <div class="video-label"></div>
+            </div>
+            <div class="carousel-item" data-slot="3">
+              <video controls autoplay loop muted playsinline preload="metadata"></video>
+              <div class="video-label"></div>
+            </div>
+          </div>
+          <div class="carousel-dots" id="scene-dots"></div>
+        </div>
+        <button class="carousel-nav" type="button" aria-label="Next" id="scene-next">
+          <svg viewBox="0 0 50 80" width="18" height="18"><polyline fill="currentColor" stroke-width=".5em" stroke-linecap="round" stroke-linejoin="round" points="0.375,0.375 45.63,38.087 0.375,75.8"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ Robot in Action ══════════════ -->
+  <section class="section band band-white">
+    <div class="container">
+      <h2 class="title is-3" style="text-align: center;">Robot in Action</h2>
+      <p style="font-size: 1rem; color: #5b6472; max-width: 860px; margin: 0.75rem auto 1.5rem; line-height: 1.7; text-align: center;">
+        Official demonstrations of the Tiangong robot platform, showcasing its full-body motion control, dynamic agility, and robust locomotion capabilities. Click any thumbnail to watch the full video on Bilibili.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+        <a href="https://www.bilibili.com/video/BV1zDc7zKEV6" target="_blank" style="text-decoration: none; color: inherit;">
+          <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(15,23,42,0.12); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(15,23,42,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(15,23,42,0.12)'">
+            <img src="https://i2.hdslb.com/bfs/archive/0c39185943ca29dff8e78526f043b2c3e435d9f1.jpg" alt="Thomas Flare" style="width: 100%; height: auto; display: block;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: background 0.25s;" onmouseover="this.style.background='rgba(0,0,0,0.4)'" onmouseout="this.style.background='rgba(0,0,0,0.25)'">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.85)"/><polygon points="19,14 19,34 36,24" fill="#3b82f6"/></svg>
+            </div>
+          </div>
+          <p style="font-size: 0.8rem; font-style: italic; color: #4b5563; text-align: center; margin-top: 0.5rem; line-height: 1.4;">
+            Thomas flare — full-body dynamic rotation demonstrating extreme balance and coordinated joint control.
+          </p>
+        </a>
+        <a href="https://www.bilibili.com/video/BV1c1F3zHE2Y" target="_blank" style="text-decoration: none; color: inherit;">
+          <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(15,23,42,0.12); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(15,23,42,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(15,23,42,0.12)'">
+            <img src="https://i2.hdslb.com/bfs/archive/7fd90612485c7918328821081dfcf4a65a0e1efd.jpg" alt="Leap of Faith" style="width: 100%; height: auto; display: block;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: background 0.25s;" onmouseover="this.style.background='rgba(0,0,0,0.4)'" onmouseout="this.style.background='rgba(0,0,0,0.25)'">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.85)"/><polygon points="19,14 19,34 36,24" fill="#3b82f6"/></svg>
+            </div>
+          </div>
+          <p style="font-size: 0.8rem; font-style: italic; color: #4b5563; text-align: center; margin-top: 0.5rem; line-height: 1.4;">
+            "Leap of Faith" — bold high-altitude jump showcasing agile locomotion and robust landing control.
+          </p>
+        </a>
+        <a href="https://www.bilibili.com/video/BV1HGFSztEMB" target="_blank" style="text-decoration: none; color: inherit;">
+          <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(15,23,42,0.12); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(15,23,42,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(15,23,42,0.12)'">
+            <img src="source/figure/tiangong3_demo_cover.jpg" alt="Tiangong 3.0 Demo" style="width: 100%; height: auto; display: block;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: background 0.25s;" onmouseover="this.style.background='rgba(0,0,0,0.4)'" onmouseout="this.style.background='rgba(0,0,0,0.25)'">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.85)"/><polygon points="19,14 19,34 36,24" fill="#3b82f6"/></svg>
+            </div>
+          </div>
+          <p style="font-size: 0.8rem; font-style: italic; color: #4b5563; text-align: center; margin-top: 0.5rem; line-height: 1.4;">
+            Full capability demo — versatile whole-body control across diverse tasks with dexterous manipulation.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ BibTeX ══════════════ -->
+  <section class="section band band-white" id="BibTeX">
+    <div class="container content">
+      <h2 class="titile">BibTeX</h2>
+      <pre><code>@misc{robotpan2026,
+  title         = {RobotPan: A 360° Surround-View Robotic Vision System for Embodied Perception},
+  author        = {TODO},
+  year          = {2026},
+  eprint        = {TODO},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  url           = {TODO}
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ══════════════ Footer ══════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>Page template borrowed from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a> and <a href="https://meshmimic.github.io/"><span class="dnerf">MeshMimic</span></a>.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var items = [
+        { src: "source/video/68288d8a1efd00b21c143cb3.mp4", desc: "Crowded office pantry — Compact 3D Gaussian reconstruction and depth estimation in narrow walkways with severe dynamic human interference." },
+        { src: "source/video/682895f2dc28d637bc371ecb.mp4", desc: "Meeting area — Precise depth estimation and 360° rendering under extreme high-dynamic-range (HDR) lighting from floor-to-ceiling windows." },
+        { src: "source/video/682d882df47f7aafe4e902d7.mp4", desc: "Indoor lounge — 360° surround-view rendering and depth estimation challenged by strong window backlighting and complex furniture occlusions." },
+        { src: "source/video/6842a0921d28ab9519e0188a.mp4", desc: "Industrial workspace — Robust multi-view depth and 360° rendering amidst moving machinery (conveyor belts) and dense human activity." },
+        { src: "source/video/68492ce6a136591f796381cb.mp4", desc: "Exhibition hall — Surround-view reconstruction in an extremely cluttered, large-scale environment with massive unpredictable dynamic crowds." },
+        { src: "source/video/685e0c3cdd2bdab618ba0a6a.mp4", desc: "Outdoor street — Real-time dense reconstruction and view synthesis in an unbounded, large-scale outdoor scenario under direct natural sunlight." },
+        { src: "source/video/686387d206c31370ab32e095.mp4", desc: "Textureless corridor — Robust SLAM mapping and depth sensing in a feature-poor environment with challenging thin obstacles (stanchions)." },
+        { src: "source/video/686387d206c31370ab32e09d.mp4", desc: "Dynamic tech space — Real-time novel view synthesis and dense reconstruction amidst moving humans and highly reflective screens." }
+      ];
+
+      var pageSize = 4;
+      var pageIndex = 0;
+      var totalPages = Math.ceil(items.length / pageSize);
+      var slots = document.querySelectorAll("#scene-page .carousel-item");
+      var dotsContainer = document.getElementById("scene-dots");
+
+      for (var d = 0; d < totalPages; d++) {
+        var dot = document.createElement("button");
+        dot.className = "carousel-dot" + (d === 0 ? " active" : "");
+        dot.setAttribute("data-page", d);
+        dot.addEventListener("click", function () {
+          pageIndex = parseInt(this.getAttribute("data-page"));
+          render();
+        });
+        dotsContainer.appendChild(dot);
+      }
+
+      function render() {
+        var start = pageIndex * pageSize;
+        for (var i = 0; i < slots.length; i++) {
+          var item = items[start + i];
+          var video = slots[i].querySelector("video");
+          var label = slots[i].querySelector(".video-label");
+          if (!item) {
+            slots[i].style.display = "none";
+            continue;
+          }
+          slots[i].style.display = "";
+          video.setAttribute("src", item.src);
+          video.load();
+          video.play().catch(function () {});
+          if (label) label.textContent = item.desc;
+        }
+        var dots = dotsContainer.querySelectorAll(".carousel-dot");
+        for (var j = 0; j < dots.length; j++) {
+          dots[j].className = "carousel-dot" + (j === pageIndex ? " active" : "");
+        }
+      }
+
+      document.getElementById("scene-prev").addEventListener("click", function () {
+        pageIndex = (pageIndex - 1 + totalPages) % totalPages;
+        render();
+      });
+
+      document.getElementById("scene-next").addEventListener("click", function () {
+        pageIndex = (pageIndex + 1) % totalPages;
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
